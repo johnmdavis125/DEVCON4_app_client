@@ -44,9 +44,9 @@ export default function App() {
       const createdQuestion = response.data
       console.log(`this is createdQuestion ${createdQuestion}`);
       await updateFormInputs({
-        userName: '',
-        userImage: '',
-        category: '',
+        userName: 'defaultName',
+        userImage: 'defaulturl',
+        category: 'defaultCat',
         topic: '',
         body: ''
       });
@@ -55,6 +55,25 @@ export default function App() {
       console.error(error)
     };
   };
+  
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    event.persist();
+    console.log(event);
+    try {
+      // await axios.delete(`http://localhost:3001/api/questions/${event.target.id}`)
+      console.log(`look here ${event.target.id}`);
+    } catch(error){
+      console.error(error)
+    };
+  };
+
+    // const handleUpdateQuestion = async (event) => {
+          //   event.preventDefault();
+          //   const response = await axios.put(`http://localhost:3001/api/questions/${event.target._id}`, )
+          // }
+          // -> need state variable for updated form inputs to pass into the axios.put action -> gen form with default values first
+
 
   return (
     <div className="App">
@@ -85,6 +104,9 @@ export default function App() {
                 <div key={question._id} style={{border: "1px solid red"}}>
                   <h6>{question.topic}</h6>
                   <p>{question.body}</p>
+                  <form onSubmit={handleDelete}>
+                    <input type='submit' value='Delete Question'/>
+                  </form>
                 </div>
               )
             })
