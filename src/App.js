@@ -137,9 +137,49 @@ export default function App() {
           // }
           // -> need state variable for updated form inputs to pass into the axios.put action -> gen form with default values first
 
+    const [questionUpdate, setQuestionUpdate] = useState({}) 
+
+    const handleClickUpdateQuestion = async (event) => {
+      event.preventDefault();
+      const response = await axios.get(`http://localhost:3001/api/questions/${event.target.id}`);
+      await setQuestionUpdate({...response.data});
+      // function setValues(){
+      //   document.getElementById('topicUpdate').value = response.data.topic;
+      //   document.getElementById('bodyUpdate').value = response.data.body;
+      // }
+      // setValues(); 
+     
+    }
+
+    const handleQuestionUpdateChange = (event) => {
+      const questionEdit = Object.assign({}, questionUpdate, {[event.target.id]: event.target.value})
+      console.log(`this is questionEdit, ${questionEdit.topic}, ${questionEdit.body}`)
+      setQuestionUpdate(questionEdit);
+
+      console.log(`this is questionUpdate, which should now populate in the update form ${questionUpdate.topic}, ${questionUpdate.body}`)
+    }
+
+    const handleQuestionUpdateSubmit = async (event) => {
+      event.preventDefault();
+      const response = await axios.put(`http://localhost:3001/api/questions/${event.target.id}`, {topic: questionUpdate.topic, body: questionUpdate.body});
+      await setQuestionUpdate({});
+      // await console.log(`this is questionUpdate ${questionUpdate.topic}, ${questionUpdate.body}`);
+    }
+
+    useEffect(
+      () => {
+        (
+          async function (){
+            await console.log(`this is questionUpdate from useEffect ${questionUpdate.topic}, ${questionUpdate.body}`);
+          }
+        )()
+      }, [questionUpdate])
 
   return (
     <div className="App">
+
+    {Object.keys(questionUpdate) < 1 ? 
+    <div>
       <h1>This is the app component - questions form</h1>
         <form onSubmit={handleQuestionSubmit}>
           <h3>Post Your Question</h3>
@@ -170,22 +210,52 @@ export default function App() {
                   <form onSubmit={handleQuestionDelete} id={question._id}>
                     <input type='submit' value='Delete Question'/>
                   </form>
+                  {/* triggers update */}
+                  <form onSubmit={handleClickUpdateQuestion} id={question._id}>
+                    <input type='submit' value='Update Question'/>
+                  </form>
                 </div>
               )
             })
           }
         </div>
-{/* End Question Form - Start Response Form */}
+        </div>
+: 
+  <div>
+      <h1>This is the app component - question update form</h1>
+        <form onSubmit={handleQuestionUpdateSubmit} id={questionUpdate._id}>
+          <h3>Post Your Updated Question</h3>
+          <label htmlFor='topic'>Topic</label>
+          <input
+          type='text'
+          id='topic'
+          onChange={handleQuestionUpdateChange}
+          defaultValue={questionUpdate.topic}
+          /><br />
+          <label htmlFor='body'>Question</label>
+          <input
+          type='text'
+          id='body'
+          onChange={handleQuestionUpdateChange}
+          defaultValue={questionUpdate.body}
+          /><br />
+          <input type='submit' value='Post Updated Question' />
+        </form>
+  </div>
+}
+
+
+  {/* End Question Form(s) - Start Response Form */}
       <h1>This is the app component - Response form</h1>
         <form onSubmit={handleResponseSubmit}>
           <h3>Post Your Response</h3>
-          <label htmlFor='topic'>Topic</label>
+          {/* <label htmlFor='topic'>Topic</label>
           <input
           type='text'
           id='topic'
           onChange={handleResponseChange}
           value={responseFormInputs.topic}
-          /><br />
+          /><br /> */}
           <label htmlFor='body'>Response</label>
           <input
           type='text'
@@ -210,6 +280,9 @@ export default function App() {
             })
           }
         </div>
+
+
+
 
     </div>
   );
