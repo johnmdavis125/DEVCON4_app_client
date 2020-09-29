@@ -29,7 +29,7 @@ export default function App() {
           await getQuestions();
         }
       )()
-    }, [])
+    }, [questions])
 
   const handleChange = (event) => {
     const updatedFormInputs = Object.assign({}, formInputs, {[event.target.id]: event.target.value})
@@ -42,7 +42,7 @@ export default function App() {
     try{
       const response = await axios.post('http://localhost:3001/api/questions', formInputs);
       const createdQuestion = response.data
-      console.log(`this is createdQuestion ${createdQuestion}`);
+      console.log(`this is createdQuestion ${createdQuestion.body}`);
       await updateFormInputs({
         userName: 'defaultName',
         userImage: 'defaulturl',
@@ -61,8 +61,8 @@ export default function App() {
     event.persist();
     console.log(event);
     try {
-      // await axios.delete(`http://localhost:3001/api/questions/${event.target.id}`)
-      console.log(`look here ${event.target.id}`);
+    console.log(`look here ${event.target.id}`);
+      await axios.delete(`http://localhost:3001/api/questions/${event.target.id}`)
     } catch(error){
       console.error(error)
     };
@@ -104,7 +104,7 @@ export default function App() {
                 <div key={question._id} style={{border: "1px solid red"}}>
                   <h6>{question.topic}</h6>
                   <p>{question.body}</p>
-                  <form onSubmit={handleDelete}>
+                  <form onSubmit={handleDelete} id={question._id}>
                     <input type='submit' value='Delete Question'/>
                   </form>
                 </div>
