@@ -127,6 +127,7 @@ export default function Questions(props){
                 <form onSubmit={handleQuestionSubmit}>
                     <h3>Post Your Question</h3>
                     <label htmlFor="category">Choose a language:</label>
+                    <div className='select is-small'>
                     <select name="category" id="category" onChange={handleQuestionChange}>
                         <option value="">--Please choose an option--</option>
                         <option value="html">HTML</option>
@@ -134,7 +135,8 @@ export default function Questions(props){
                         <option value="javascript">Javascript</option>
                         <option value="ruby">Ruby</option>
                         <option value="sql">SQL/MQL</option>
-                    </select><br />
+                    </select>
+                    </div><br />
                     <label htmlFor='topic'>Topic</label>
                     <input
                     type='text'
@@ -154,6 +156,7 @@ export default function Questions(props){
 
                 <h3>Filter Results</h3>
                     <label htmlFor="language">Choose a language:</label>
+                    <div className='select is-small'>
                     <select name="language" id="language" onChange={handleFilterChange}>
                         <option value="">--Please choose an option--</option>
                         <option value="html">HTML</option>
@@ -161,7 +164,9 @@ export default function Questions(props){
                         <option value="javascript">Javascript</option>
                         <option value="ruby">Ruby</option>
                         <option value="sql">SQL/MQL</option>
-                    </select><br />
+                    </select>
+                    </div><br />
+
 
 
                 <div>
