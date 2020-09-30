@@ -49,7 +49,7 @@ export default function Show(props){
             <h4>{body}</h4>  
             <button onClick={closeShow}>Close Show Page</button>
 
-            <ResponseForm />
+            <ResponseForm questionid={_id}/>
         </>
         }
         </div>

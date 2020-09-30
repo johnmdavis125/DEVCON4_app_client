@@ -3,27 +3,12 @@ import axios from 'axios';
 
 export default function ResponseForm(props){
 
-    const [responseFormStatus, setResponseFormStatus] = useState(false);
-    const openResponseForm = () => {
-        try {
-            setResponseFormStatus(true);
-        }catch(error){
-            console.error(error)
-        };
-    };
-    const closeResponseForm = () => {
-        try {
-            setResponseFormStatus(false);
-        }catch(error){
-            console.error(error)
-        }
-    }
-
     const [responses, setResponses] = useState([]);
     const [responseFormInputs, updateResponseFormInputs] = useState({
     userName: 'defaultName',
     userImage: 'defaultUrl',
     category: 'defaultCat',
+    qid: `${props.questionid}`,
     body: ''
     })
 
@@ -83,6 +68,23 @@ export default function ResponseForm(props){
             };
             };
 
+    const [responseFormStatus, setResponseFormStatus] = useState(false);
+    const openResponseForm = () => {
+        try {
+            setResponseFormStatus(true);
+        }catch(error){
+            console.error(error)
+        };
+    };
+    const closeResponseForm = () => {
+        try {
+            setResponseFormStatus(false);
+        }catch(error){
+            console.error(error)
+        }
+    }
+
+
 
     return (
         <div style={{border: "1px solid green"}}>
@@ -111,14 +113,34 @@ export default function ResponseForm(props){
                 responses.map(res =>{
                     return(
                     <div key={res._id} style={{border: "1px solid red"}}>
+                        {props.questionid === res.qid ?
+                            <>
+                            <p>{res.body}</p>
+                            <p>{res.qid}</p>
+                            <form onSubmit={handleResponseDelete} id={res._id}>
+                            <input type='submit' value='Delete Response'/>
+                            </form>
+                            </>
+                        : ''
+                            // <p>{res._id} does not match {res.qid}</p>
+                    }
+                        
+                    </div>
+                    )
+                })
+                }
+                {/* responses.map(res =>{
+                    return(
+                    <div key={res._id} style={{border: "1px solid red"}}>
                         <p>{res.body}</p>
+                        <p>{res.qid}</p>
                         <form onSubmit={handleResponseDelete} id={res._id}>
                         <input type='submit' value='Delete Response'/>
                         </form>
                     </div>
                     )
                 })
-                }
+                } */}
             </div>
 
 
