@@ -1,34 +1,60 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import ResponseForm from './ResponseForm';
 
 export default function Show(props){
-    const [question, updateQuestion] = useState({}); 
+ 
+    const { _id, topic, body } = props.q
 
-    useEffect(()=>{
-        (async ()=>{
-            try{
-                const response = await fetch('http:localhost:3001/api/questions/' + props.match.params.id); 
-                const data = await response.json(); 
-                data ? await updateQuestion(data) : updateQuestion({});
-            }catch(error){
-                console.error(error);
-            }
-        })();
-    },[]);
+    const [myShownQuestion, setMyShownQuestion] = useState({});
+    // const [responseFormStatus, setResponseFormStatus] = useState(false);
 
+    const openShow = async (event) => {
+        event.persist();
+        try {
+            const response = await axios.get(`http://localhost:3001/api/questions/${_id}`);
+    
+            await setMyShownQuestion({...myShownQuestion, ...response.data});
+    
+        }catch(error){
+            console.error(error);
+        };
+      }
+
+      const closeShow = () => {
+        try {  
+            setMyShownQuestion({});
+        }catch(error){
+            console.error(error);
+        };
+      }
+
+    //   const openResponseForm = () => {
+    //       try {
+    //           setResponseFormStatus(true);
+    //       }catch(error){
+    //           console.error(error)
+    //       };
+    //   };
 
     return (
-        <div>
-            {Object.keys(question).length > 0 ? (
-                <div>
-                    <h1>Question Show Page</h1>
-                    <h2>Topic: {question.topic}</h2>
-                    <h4>Question: {question.body}</h4> 
-                </div>
-            ) : (
-                <h1>Question length is 0</h1>
-            )}
-        </div>
-    )
+        <div style={{border: "1px solid blue"}}>
+        <button onClick={openShow}>Open Show Page</button>
+            {Object.keys(myShownQuestion).length > 0 &&
+            <>
+                <h2>Show Page</h2>
+                <h4>{_id}</h4>
+                <h4>{topic}</h4>
+                <h4>{body}</h4>  
+                <button onClick={closeShow}>Close Show Page</button>
 
+
+                <ResponseForm />
+                {/* <button onClick={openResponseForm}>Post a Response</button> */}
+            </>
+            }
+            </div> 
+
+    )
 
 }

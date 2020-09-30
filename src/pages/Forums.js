@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Link from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+import Show from '../../src/components/Show.js';
 
-export default function Home(){
+export default function Forums(){
 
 const [questions, setQuestions] = useState([]); 
 const [questionFormInputs, updateQuestionFormInputs] = useState({
@@ -166,7 +167,6 @@ useEffect(
     )()
     }, [questionUpdate])
 
-
     
 return (
 <div className="App">
@@ -200,12 +200,16 @@ return (
             <div key={question._id} style={{border: "1px solid red"}}>
                 <h6>{question.topic}</h6>
                 <p>{question.body}</p>
-                <form onSubmit={handleQuestionDelete} id={question._id}>
-                <input type='submit' value='Delete Question'/>
-                </form>
-                {/* triggers update */}
+
+                {/* <Link to={`/show`} data={question}>Show Link Test</Link> */}
+                <Show q={question}/>
+
                 <form onSubmit={handleClickUpdateQuestion} id={question._id}>
                 <input type='submit' value='Update Question'/>
+                </form>
+
+                <form onSubmit={handleQuestionDelete} id={question._id}>
+                <input type='submit' value='Delete Question'/>
                 </form>
             </div>
             )
