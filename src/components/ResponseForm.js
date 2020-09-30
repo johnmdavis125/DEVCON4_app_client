@@ -65,6 +65,7 @@ export default function ResponseForm(props){
             body: ''
             });
             await setResponses([createdResponse, ...responses])
+            await closeResponseForm(); 
         }catch(error){
             console.error(error)
         };

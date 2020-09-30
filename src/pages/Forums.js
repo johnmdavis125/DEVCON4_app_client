@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, Route } from 'react-router-dom';
 import Show from '../../src/components/Show.js';
+import QuestionForm from '../components/QuestionForm.js';
 
 export default function Forums(){
 
-const [questions, setQuestions] = useState([]); 
-const [questionFormInputs, updateQuestionFormInputs] = useState({
-userName: 'defaultName',
-userImage: 'defaultUrl',
-category: 'defaultCat',
-topic: '',
-body: ''
-});  
+// const [questions, setQuestions] = useState([]); 
+// const [questionFormInputs, updateQuestionFormInputs] = useState({
+// userName: 'defaultName',
+// userImage: 'defaultUrl',
+// category: 'defaultCat',
+// topic: '',
+// body: ''
+// });  
 
 // const [responses, setResponses] = useState([]);
 // const [responseFormInputs, updateResponseFormInputs] = useState({
@@ -22,15 +23,15 @@ body: ''
 // body: ''
 // })
 
-const getQuestions = async () => {
-try{
-    const response = await fetch('http://localhost:3001/api/questions'); 
-    const qData = await response.json();
-    setQuestions(qData)
-}catch(error){
-    console.error(error); 
-};
-};
+// const getQuestions = async () => {
+// try{
+//     const response = await fetch('http://localhost:3001/api/questions'); 
+//     const qData = await response.json();
+//     setQuestions(qData)
+// }catch(error){
+//     console.error(error); 
+// };
+// };
 
 // const getResponses = async () => {
 // try{
@@ -42,14 +43,14 @@ try{
 // };
 // };
 
-useEffect(
-() => {
-    (
-    async function (){
-        await getQuestions();
-    }
-    )()
-}, [questions])
+// useEffect(
+// () => {
+//     (
+//     async function (){
+//         await getQuestions();
+//     }
+//     )()
+// }, [questions])
 
 // useEffect(
 // () => {
@@ -60,35 +61,35 @@ useEffect(
 //     )()
 // }, [responses])
 
-const handleQuestionChange = (event) => {
-const updatedQuestionFormInputs = Object.assign({}, questionFormInputs, {[event.target.id]: event.target.value})
-updateQuestionFormInputs(updatedQuestionFormInputs);
-}
+// const handleQuestionChange = (event) => {
+// const updatedQuestionFormInputs = Object.assign({}, questionFormInputs, {[event.target.id]: event.target.value})
+// updateQuestionFormInputs(updatedQuestionFormInputs);
+// }
 
 // const handleResponseChange = (event) => {
 // const updatedResponseFormInputs = Object.assign({}, responseFormInputs, {[event.target.id]: event.target.value})
 // updateResponseFormInputs(updatedResponseFormInputs);
 // }
 
-const handleQuestionSubmit = async (event) => {
-event.preventDefault();
-console.log(questionFormInputs);
-try{
-    const response = await axios.post('http://localhost:3001/api/questions', questionFormInputs);
-    const createdQuestion = response.data
-    console.log(`this is createdQuestion ${createdQuestion.body}`);
-    await updateQuestionFormInputs({
-    userName: 'defaultName',
-    userImage: 'defaulturl',
-    category: 'defaultCat',
-    topic: '',
-    body: ''
-    });
-    await setQuestions([createdQuestion, ...questions])
-}catch(error){
-    console.error(error)
-};
-};
+// const handleQuestionSubmit = async (event) => {
+// event.preventDefault();
+// console.log(questionFormInputs);
+// try{
+//     const response = await axios.post('http://localhost:3001/api/questions', questionFormInputs);
+//     const createdQuestion = response.data
+//     console.log(`this is createdQuestion ${createdQuestion.body}`);
+//     await updateQuestionFormInputs({
+//     userName: 'defaultName',
+//     userImage: 'defaulturl',
+//     category: 'defaultCat',
+//     topic: '',
+//     body: ''
+//     });
+//     await setQuestions([createdQuestion, ...questions])
+// }catch(error){
+//     console.error(error)
+// };
+// };
 
 // const handleResponseSubmit = async (event) => {
 // event.preventDefault();
@@ -109,17 +110,17 @@ try{
 // };
 // };
 
-const handleQuestionDelete = async (event) => {
-event.preventDefault();
-event.persist();
-console.log(event);
-try {
-console.log(`look here ${event.target.id}`);
-    await axios.delete(`http://localhost:3001/api/questions/${event.target.id}`)
-} catch(error){
-    console.error(error)
-};
-};
+// const handleQuestionDelete = async (event) => {
+// event.preventDefault();
+// event.persist();
+// console.log(event);
+// try {
+// console.log(`look here ${event.target.id}`);
+//     await axios.delete(`http://localhost:3001/api/questions/${event.target.id}`)
+// } catch(error){
+//     console.error(error)
+// };
+// };
 
 // const handleResponseDelete = async (event) => {
 // event.preventDefault();
@@ -133,45 +134,45 @@ console.log(`look here ${event.target.id}`);
 // };
 // };
 
-const [questionUpdate, setQuestionUpdate] = useState({}) 
+// const [questionUpdate, setQuestionUpdate] = useState({}) 
 
-const handleClickUpdateQuestion = async (event) => {
-    event.preventDefault();
-    const response = await axios.get(`http://localhost:3001/api/questions/${event.target.id}`);
-    await setQuestionUpdate({...response.data});
+// const handleClickUpdateQuestion = async (event) => {
+//     event.preventDefault();
+//     const response = await axios.get(`http://localhost:3001/api/questions/${event.target.id}`);
+//     await setQuestionUpdate({...response.data});
 
     
-}
+// }
 
-const handleQuestionUpdateChange = (event) => {
-    const questionEdit = Object.assign({}, questionUpdate, {[event.target.id]: event.target.value})
-    console.log(`this is questionEdit, ${questionEdit.topic}, ${questionEdit.body}`)
-    setQuestionUpdate(questionEdit);
+// const handleQuestionUpdateChange = (event) => {
+//     const questionEdit = Object.assign({}, questionUpdate, {[event.target.id]: event.target.value})
+//     console.log(`this is questionEdit, ${questionEdit.topic}, ${questionEdit.body}`)
+//     setQuestionUpdate(questionEdit);
 
-    console.log(`this is questionUpdate, which should now populate in the update form ${questionUpdate.topic}, ${questionUpdate.body}`)
-}
+//     console.log(`this is questionUpdate, which should now populate in the update form ${questionUpdate.topic}, ${questionUpdate.body}`)
+// }
 
-const handleQuestionUpdateSubmit = async (event) => {
-    event.preventDefault();
-    const response = await axios.put(`http://localhost:3001/api/questions/${event.target.id}`, {topic: questionUpdate.topic, body: questionUpdate.body});
-    await setQuestionUpdate({});
-    // await console.log(`this is questionUpdate ${questionUpdate.topic}, ${questionUpdate.body}`);
-}
+// const handleQuestionUpdateSubmit = async (event) => {
+//     event.preventDefault();
+//     const response = await axios.put(`http://localhost:3001/api/questions/${event.target.id}`, {topic: questionUpdate.topic, body: questionUpdate.body});
+//     await setQuestionUpdate({});
 
-useEffect(
-    () => {
-    (
-        async function (){
-        await console.log(`this is questionUpdate from useEffect ${questionUpdate.topic}, ${questionUpdate.body}`);
-        }
-    )()
-    }, [questionUpdate])
+// }
+
+// useEffect(
+//     () => {
+//     (
+//         async function (){
+//         await console.log(`this is questionUpdate from useEffect ${questionUpdate.topic}, ${questionUpdate.body}`);
+//         }
+//     )()
+//     }, [questionUpdate])
 
     
 return (
 <div className="App">
-
-{Object.keys(questionUpdate) < 1 ? 
+    <QuestionForm />
+{/* {Object.keys(questionUpdate) < 1 ? 
 <div>
     <h1>This is the Forums component - questions form</h1>
     <form onSubmit={handleQuestionSubmit}>
@@ -201,7 +202,6 @@ return (
                 <h6>{question.topic}</h6>
                 <p>{question.body}</p>
 
-                {/* <Link to={`/show`} data={question}>Show Link Test</Link> */}
                 <Show q={question}/>
 
                 <form onSubmit={handleClickUpdateQuestion} id={question._id}>
@@ -239,7 +239,7 @@ return (
         <input type='submit' value='Post Updated Question' />
     </form>
 </div>
-}
+} */}
 
 
 

@@ -39,22 +39,19 @@ export default function Show(props){
 
     return (
         <div style={{border: "1px solid blue"}}>
-        <button onClick={openShow}>Open Show Page</button>
-            {Object.keys(myShownQuestion).length > 0 &&
-            <>
-                <h2>Show Page</h2>
-                <h4>{_id}</h4>
-                <h4>{topic}</h4>
-                <h4>{body}</h4>  
-                <button onClick={closeShow}>Close Show Page</button>
+        {Object.keys(myShownQuestion).length < 1 ? 
+            <button onClick={openShow}>Open Show Page</button>
+        : 
+        <>
+            <h2>Show Page</h2>
+            <h4>{_id}</h4>
+            <h4>{topic}</h4>
+            <h4>{body}</h4>  
+            <button onClick={closeShow}>Close Show Page</button>
 
-
-                <ResponseForm />
-                {/* <button onClick={openResponseForm}>Post a Response</button> */}
-            </>
-            }
-            </div> 
-
+            <ResponseForm />
+        </>
+        }
+        </div>
     )
-
 }
