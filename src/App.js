@@ -15,7 +15,7 @@ export default function App(props){
   const [state, setState] = useState({
     email: '',
     password: '',
-    isLoggedIn: false,
+    isLoggedIn: false
   })
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -38,7 +38,8 @@ export default function App(props){
   }
 
   const handleInput = (event) => {
-    setState({ ...state, [event.target.id]: event.target.value });
+    const updatedSignUpFormInputs = Object.assign({}, state, {[event.target.id]: event.target.value})
+    setState(updatedSignUpFormInputs);
   };
 
   const handleSignUp = async (event) => {
@@ -81,7 +82,7 @@ export default function App(props){
             render={(props) => {
               return (
                 <SignUpForm
-                  isLoggedIn={isLoggedIn}
+                  state={state}
                   handleInput={handleInput}
                   handleSignUp={handleSignUp}
                 />
@@ -104,7 +105,7 @@ export default function App(props){
             render={(props) => {
               return (
                 <LogInForm
-                  isLoggedIn={isLoggedIn}
+                  state={state}
                   handleInput={handleInput}
                   handleLogIn={handleLogIn}
                 />
