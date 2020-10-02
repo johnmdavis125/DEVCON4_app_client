@@ -114,38 +114,6 @@ export default function ResponseForm(props){
         }
     }
 
-    // useEffect(
-    //     () => {
-    //     (
-    //         async function (){
-    //         await console.log(`this is responseUpdate from useEffect ${responseUpdate.votes}, ${responseUpdate.body}`);
-    //         await responseUpdate.votes++;
-    //         await console.log(`this is responseUpdate.votes plus 1 ${responseUpdate.votes}`)
-    //     }
-    //     )()
-    //     }, [responseUpdate])
-
-
-    // const addVote = async (event) => {
-    //     event.preventDefault();
-    //     event.persist();
-    //     try {
-    //         const response = await axios.put(`http://localhost:3001/api/responses/${event.target.id}`, {votes: responseUpdate.votes});
-    //         await setResponseUpdate({})
-    //     }catch(error){
-    //         console.error(error)
-    //     }
-    // }
-
-    // const handleQuestionUpdateSubmit = async (event) => {
-    //     event.preventDefault();
-    //     const response = await axios.put(`http://localhost:3001/api/questions/${event.target.id}`, {topic: questionUpdate.topic, body: questionUpdate.body});
-    //     await setQuestionUpdate({});
-    
-    // }
-
-
-
 
 
     return (
@@ -177,6 +145,7 @@ export default function ResponseForm(props){
                     <div key={res._id} style={{border: "1px solid red"}}>
                         {props.questionid === res.qid ?
                             <>
+                            {/* run sorting algorithm - most likes first */}
                             <p>{res.body}</p>
                             <p>Votes: {res.votes}</p>
                             <form onSubmit={upVote} id={res._id}>

@@ -18,6 +18,11 @@ export default function App(props){
     isLoggedIn: false
   })
 
+  const [currentUser, updateCurrentUser] = useState({
+    userName: 'test name',
+    userImage: 'test'
+  })
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -27,6 +32,23 @@ export default function App(props){
       setIsLoggedIn(false);
     }
   }, [isLoggedIn]); 
+
+  // const setUser = (loggedInUser, img) => {
+  //   updateCurrentUser({
+  //     userName: loggedInUser,
+  //     userImage: img
+  //   })
+  //   console.log(`this is currentUser ${currentUser}, ${currentUser.userName}, ${currentUser.userImage}`)
+  // }
+
+  // const handleQuestionChange = (event) => {
+  //   const updatedQuestionFormInputs = Object.assign({}, questionFormInputs, {[event.target.id]: event.target.value})
+  //   updateQuestionFormInputs(updatedQuestionFormInputs);
+  //   }
+
+
+
+
 
   const handleLogOut = () => {
     setState({
@@ -66,6 +88,16 @@ export default function App(props){
       });
       localStorage.token = response.data.token;
       setIsLoggedIn(true);
+
+      console.log(`${state.email} just logged in`)
+      // const user = state.email
+      // const img = 'images/default.png'
+      const newUser = {
+        userName: `${state.email}`,
+        userImage: 'images/default.png'
+      }
+      await updateCurrentUser({...currentUser, ...newUser});
+      await console.log(`this is currentUser ${currentUser}, ${currentUser.userName}, ${currentUser.userImage}`)
     } catch(error){
       console.log(error);
     }
@@ -116,7 +148,7 @@ export default function App(props){
             path='/questions'
             render={(props) => {
               return (
-                <Questions />
+                <Questions currentUser={currentUser} />
               )
             }}
           />

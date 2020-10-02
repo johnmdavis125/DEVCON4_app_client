@@ -4,10 +4,12 @@ import Show from '../../src/components/Show.js';
 
 export default function Questions(props){
     
+    const { userName, userImage } = props.currentUser
+
     const [questions, setQuestions] = useState([]); 
     const [questionFormInputs, updateQuestionFormInputs] = useState({
-    userName: 'defaultName',
-    userImage: 'defaultUrl',
+    userName: `${userName}`,
+    userImage: `${userImage}`,
     category: '',
     topic: '',
     body: ''
@@ -50,8 +52,8 @@ export default function Questions(props){
                 const createdQuestion = response.data
                 console.log(`this is createdQuestion ${createdQuestion.body}`);
                 await updateQuestionFormInputs({
-                    userName: 'defaultName',
-                    userImage: 'defaulturl',
+                    userName: `${userName}`,
+                    userImage: `${userImage}`,
                     category: '',
                     topic: '',
                     body: ''
@@ -180,8 +182,8 @@ export default function Questions(props){
                             <>
                             <h5>Category: {question.category}</h5>
                             <h6>Topic: {question.topic}</h6>
-                            <p>{question.body}</p>
-
+                            <p>{`${question.userName} asks: ${question.body}`}</p>
+                            <img src={question.userImage} alt='url of user image'/>
                             <Show q={question}/>
 
                             <form onSubmit={handleClickUpdateQuestion} id={question._id}>

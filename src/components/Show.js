@@ -4,7 +4,7 @@ import ResponseForm from './ResponseForm';
 
 export default function Show(props){
  
-    const { _id, topic, body } = props.q
+    const { _id, userName, userImage, category, topic, body } = props.q
 
     const [myShownQuestion, setMyShownQuestion] = useState({});
     // const [responseFormStatus, setResponseFormStatus] = useState(false);
@@ -45,8 +45,11 @@ export default function Show(props){
         <>
             <h2>Show Page</h2>
             <h4>{_id}</h4>
+            <h4>{userName}</h4>
+            <h4>{userImage}</h4>
+            <h4>{category}</h4>
             <h4>{topic}</h4>
-            <h4>{body}</h4>  
+            <h4>{body}</h4>
             <button onClick={closeShow}>Close Show Page</button>
 
             <ResponseForm questionid={_id}/>
