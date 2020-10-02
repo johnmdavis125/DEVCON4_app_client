@@ -9,7 +9,8 @@ export default function ResponseForm(props){
     userImage: 'defaultUrl',
     category: 'defaultCat',
     qid: `${props.questionid}`,
-    body: ''
+    body: '',
+    votes: 0
     })
 
     const getResponses = async () => {
@@ -47,7 +48,8 @@ export default function ResponseForm(props){
             userName: 'defaultName',
             userImage: 'defaulturl',
             category: 'defaultCat',
-            body: ''
+            body: '',
+            votes: 0
             });
             await setResponses([createdResponse, ...responses])
             await closeResponseForm(); 
@@ -84,6 +86,66 @@ export default function ResponseForm(props){
         }
     }
 
+    const upVote = async (event) => {
+        event.preventDefault();
+        event.persist(); 
+        try {
+            const response = await axios.get(`http://localhost:3001/api/responses/${event.target.id}`)
+            const newVote = await response.data.votes + 1
+            
+            const resp = await axios.put(`http://localhost:3001/api/responses/${event.target.id}`, {votes: newVote});
+
+        }catch(error){
+            console.error(error)
+        }
+    }
+
+    const downVote = async (event) => {
+        event.preventDefault();
+        event.persist(); 
+        try {
+            const response = await axios.get(`http://localhost:3001/api/responses/${event.target.id}`)
+            const newVote = await response.data.votes - 1
+            
+            const resp = await axios.put(`http://localhost:3001/api/responses/${event.target.id}`, {votes: newVote});
+
+        }catch(error){
+            console.error(error)
+        }
+    }
+
+    // useEffect(
+    //     () => {
+    //     (
+    //         async function (){
+    //         await console.log(`this is responseUpdate from useEffect ${responseUpdate.votes}, ${responseUpdate.body}`);
+    //         await responseUpdate.votes++;
+    //         await console.log(`this is responseUpdate.votes plus 1 ${responseUpdate.votes}`)
+    //     }
+    //     )()
+    //     }, [responseUpdate])
+
+
+    // const addVote = async (event) => {
+    //     event.preventDefault();
+    //     event.persist();
+    //     try {
+    //         const response = await axios.put(`http://localhost:3001/api/responses/${event.target.id}`, {votes: responseUpdate.votes});
+    //         await setResponseUpdate({})
+    //     }catch(error){
+    //         console.error(error)
+    //     }
+    // }
+
+    // const handleQuestionUpdateSubmit = async (event) => {
+    //     event.preventDefault();
+    //     const response = await axios.put(`http://localhost:3001/api/questions/${event.target.id}`, {topic: questionUpdate.topic, body: questionUpdate.body});
+    //     await setQuestionUpdate({});
+    
+    // }
+
+
+
 
 
     return (
@@ -116,9 +178,16 @@ export default function ResponseForm(props){
                         {props.questionid === res.qid ?
                             <>
                             <p>{res.body}</p>
+                            <p>Votes: {res.votes}</p>
+                            <form onSubmit={upVote} id={res._id}>
+                                <input type='submit' value='upvote'/>
+                            </form>
+                            <form onSubmit={downVote} id={res._id}>
+                                <input type='submit' value='downvote'/>
+                            </form>
                             <p>{res.qid}</p>
                             <form onSubmit={handleResponseDelete} id={res._id}>
-                            <input type='submit' value='Delete Response'/>
+                                <input type='submit' value='Delete Response'/>
                             </form>
                             </>
                         : ''
