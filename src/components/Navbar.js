@@ -58,57 +58,65 @@ export default function Navbar(props) {
     return (
 
         <>
-            <nav className='navbar is-primary' role='navigation' aria-label='main navigation'>
-                <ul className='container' style={{display: 'flex'}}>
-                    <div className='navbar-brand'>
-                        <a className='navbar-item'>
-                            <img src='images/default.png' width='28' height='28'/>
-                        </a>
+        <section className='hero is-dark'>
+            <div className='hero-body'>
+                <div className='container'>
+                    <h1 className='title'>Welcome to DevCon4</h1>
+                    <h2 className='subtitle'>A Community for Developers...By Developers</h2>
+                </div>
+            </div>
+        </section>
+        <nav className='navbar is-light' role='navigation' aria-label='main navigation'>
+            <ul className='container' style={{display: 'flex'}}>
+                <div className='navbar-brand'>
+                    <a className='navbar-item'>
+                        <img src='images/default.png' width='28' height='28'/>
+                    </a>
+                </div>
+                
+                <div className='navbar-start'>
+                    {navBarItems}
+                </div>  
+            
+                <div className='navbar-end'>
+                    <div className='navbar-item'>
+                        <div class='buttons' id='buttonsContainer'>
+                            {navBarButtons}
+                        </div>
                     </div>
-                    
+                </div>
+
+
+
+                    {/* <a role='button' className='navbar-burger burger' aria-label='menu' aria-expanded='false' data-target='navbarBasicExample'>
+                        <span aria-hidden='true'></span>
+                        <span aria-hidden='true'></span>
+                        <span aria-hidden='true'></span>
+                    </a> */}
+                {/* </div>
+
+                <div id='navbarBasicExample' className='navbar-menu'>
                     <div className='navbar-start'>
                         {navBarItems}
+                        <a class='navbar-item is-active'>
+                            Extra Item
+                        </a>
+                        <a class='navbar-item is-active'>
+                            Extra Item
+                        </a>
                     </div>  
                 
                     <div className='navbar-end'>
-                        <div className='navbar-item'>
-                            <div class='buttons' id='buttonsContainer'>
-                                {navBarButtons}
-                            </div>
+                    <div className='navbar-item'>
+                        <div class='buttons' id='buttonsContainer'>
+                            {navBarButtons}
                         </div>
                     </div>
-
-
-
-                        {/* <a role='button' className='navbar-burger burger' aria-label='menu' aria-expanded='false' data-target='navbarBasicExample'>
-                            <span aria-hidden='true'></span>
-                            <span aria-hidden='true'></span>
-                            <span aria-hidden='true'></span>
-                        </a> */}
-                    {/* </div>
-
-                    <div id='navbarBasicExample' className='navbar-menu'>
-                        <div className='navbar-start'>
-                            {navBarItems}
-                            <a class='navbar-item is-active'>
-                                Extra Item
-                            </a>
-                            <a class='navbar-item is-active'>
-                                Extra Item
-                            </a>
-                        </div>  
-                    
-                        <div className='navbar-end'>
-                        <div className='navbar-item'>
-                            <div class='buttons' id='buttonsContainer'>
-                                {navBarButtons}
-                            </div>
-                        </div>
-               
-                    </div>                */}
-                
-                </ul>
-            </nav>
+            
+                </div>                */}
+            
+            </ul>
+        </nav>
         </>
 
         // <>
