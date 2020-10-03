@@ -3,13 +3,13 @@ import axios from 'axios';
 import Show from '../../src/components/Show.js';
 
 export default function Questions(props){
-    
-    const { userName, userImage } = props.currentUser
+    // const { email, password, isLoggedIn } = props.state
 
     const [questions, setQuestions] = useState([]); 
     const [questionFormInputs, updateQuestionFormInputs] = useState({
-    userName: `${userName}`,
-    userImage: `${userImage}`,
+    // userName: `${props.state.email}`,
+    userName: 'userName',
+    userImage: 'images/default.png',
     category: '',
     topic: '',
     body: ''
@@ -48,12 +48,13 @@ export default function Questions(props){
         }else{
 
             try{
+                console.log(`look here ${questionFormInputs.userName}, ${questionFormInputs.userImage}`)
                 const response = await axios.post('http://localhost:3001/api/questions', questionFormInputs);
                 const createdQuestion = response.data
                 console.log(`this is createdQuestion ${createdQuestion.body}`);
                 await updateQuestionFormInputs({
-                    userName: `${userName}`,
-                    userImage: `${userImage}`,
+                    userName: `${props.state.email}`,
+                    userImage: 'images/default.png',
                     category: '',
                     topic: '',
                     body: ''
@@ -139,6 +140,7 @@ export default function Questions(props){
                         <option value="sql">SQL/MQL</option>
                     </select>
                     </div><br />
+                    <p>Current User: {props.state.email}</p>
                     <label htmlFor='topic'>Topic</label>
                     <input
                     type='text'

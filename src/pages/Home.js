@@ -5,7 +5,7 @@ export default function Home(){
     <div>
         <h1>This is the Home Page</h1>
 
-        <video src='videos/typing.mp4' autoplay controls width="250"></video>
+        {/* <video src='videos/typing.mp4' autoplay controls width="250"></video> */}
     </div>
     )
 }

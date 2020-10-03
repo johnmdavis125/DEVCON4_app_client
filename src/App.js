@@ -12,18 +12,15 @@ import LogInForm from '../src/components/LogInForm.js';
 
 
 export default function App(props){
+
+
   const [state, setState] = useState({
     email: '',
     password: '',
     isLoggedIn: false
   })
 
-  const [currentUser, updateCurrentUser] = useState({
-    userName: 'test name',
-    userImage: 'test'
-  })
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (localStorage.token) {
@@ -45,10 +42,6 @@ export default function App(props){
   //   const updatedQuestionFormInputs = Object.assign({}, questionFormInputs, {[event.target.id]: event.target.value})
   //   updateQuestionFormInputs(updatedQuestionFormInputs);
   //   }
-
-
-
-
 
   const handleLogOut = () => {
     setState({
@@ -79,6 +72,22 @@ export default function App(props){
     }
   };
 
+  const [currentUser, setCurrentUser] = useState({
+    userName: 'test',
+    userImage: 'test'
+  })
+
+  const changeUser = () => {
+    console.log(`this is state.email inside the changeUser ftn ${state.email}`)
+    const newUser = {
+      userName: `${state.email}`,
+      userImage: 'images/default.png'
+    }
+    console.log(`this is newUser.userName ${newUser.userName}`);
+    setCurrentUser({...currentUser, ...newUser}); 
+  }
+
+
   const handleLogIn = async (event) => {
     event.preventDefault();
     try {
@@ -88,16 +97,8 @@ export default function App(props){
       });
       localStorage.token = response.data.token;
       setIsLoggedIn(true);
-
-      console.log(`${state.email} just logged in`)
-      // const user = state.email
-      // const img = 'images/default.png'
-      const newUser = {
-        userName: `${state.email}`,
-        userImage: 'images/default.png'
-      }
-      await updateCurrentUser({...currentUser, ...newUser});
-      await console.log(`this is currentUser ${currentUser}, ${currentUser.userName}, ${currentUser.userImage}`)
+      console.log(`${state.email} just logged in`);
+      changeUser();
     } catch(error){
       console.log(error);
     }
@@ -148,7 +149,7 @@ export default function App(props){
             path='/questions'
             render={(props) => {
               return (
-                <Questions currentUser={currentUser} />
+                <Questions state={state} img='images/default.png' />
               )
             }}
           />
