@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import './Forms.css';
 
 export default function ResponseForm(props){
 
@@ -117,23 +118,34 @@ export default function ResponseForm(props){
 
 
     return (
-        <div style={{border: "1px solid green"}}>
-            <button onClick={openResponseForm}>Post a Response</button>
-            {responseFormStatus === true &&
+        <div>
+            {
+            responseFormStatus === false ? 
+                <button style={{margin: '25px'}} className='button is-primary' onClick={openResponseForm}>Post a Response</button>
+            // {responseFormStatus === true &&
+            :
             <>
-                <h4>Response Form</h4>
-                <button onClick={closeResponseForm}>Close Response Form</button>
+                {/* <div className='card'>
+                    <div style={{paddingBottom: '0'}} className='card-content'>
+                        <div className='media-content'>
+                            <p className='title is-4'></p>'
+                        </div>
+                    </div>
+                </div> */}
+                
+                
+                <h2>Response Form</h2>
+                <button className='button is-primary' onClick={closeResponseForm}>Close Response Form</button>
 
-                <form onSubmit={handleResponseSubmit}>
-                    <h3>Post Your Response</h3>
+                <form style={{boxShadow: '1px 1px 10px 1px rgba(10,10,10,1)', borderRadius: '2px', padding: '30px'}} className='myforms' onSubmit={handleResponseSubmit}>
                     <label htmlFor='body'>Response</label>
-                    <input
+                    <input className='input is-small'
                     type='text'
                     id='body'
                     onChange={handleResponseChange}
                     value={responseFormInputs.body}
                     /><br />
-                    <input type='submit' value='Post Response' />
+                    <input className='button is-primary' type='submit' value='Post Response' />
                 </form>
             </>
             }
@@ -142,22 +154,55 @@ export default function ResponseForm(props){
                 {
                 responses.map(res =>{
                     return(
-                    <div key={res._id} style={{border: "1px solid red"}}>
+                    <div key={res._id}>
                         {props.questionid === res.qid ?
                             <>
                             {/* run sorting algorithm - most likes first */}
-                            <p>{res.body}</p>
+                            
+                            <div style={{boxShadow: '1px 1px 10px 1px rgba(10,10,10,1)', borderRadius: '2px'}}>
+                                <div style={{paddingBottom: '0', backgroundColor: 'rgba(21, 90, 133, 0.394)'}} className='card-content'>
+                                    <div className='media'>
+                                        <div className='media-left'>
+                                            <figure className='image is-48x48'>
+                                                <img src='images/default.png' alt='user image'/>
+                                            </figure>
+                                        </div>
+                                        <div className='media-content'>
+                                            <p className='title is-4'>UserName</p>
+                                            <p className='subtitle is-6'>{res.body}</p>
+                                            <p className='subtitle is-6'>{`Votes: ${res.votes}`}</p><br />
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer className='card-footer'>
+                                    <div style={{display: 'flex', flexDirection: 'column'}}className='card-footer-item'>
+                                        <form onSubmit={upVote} id={res._id}>
+                                            <input className='button is-success is-small' type='submit' value='upvote'/>
+                                        </form>
+                                        <form onSubmit={downVote} id={res._id}>
+                                            <input className='button is-danger is-small' type='submit' value='downvote'/>
+                                        </form>
+                                    </div>
+                                    <div className='card-footer-item'>
+                                        <form onSubmit={handleResponseDelete} id={res._id}>
+                                            <input className='button is-dark is-small' type='submit' value='Delete Response'/>
+                                        </form>
+                                    </div>
+                                </footer>
+                            </div>
+                                                        
+                            {/* <p>{res.body}</p>
                             <p>Votes: {res.votes}</p>
                             <form onSubmit={upVote} id={res._id}>
-                                <input type='submit' value='upvote'/>
+                                <input className='button is-success' type='submit' value='upvote'/>
                             </form>
                             <form onSubmit={downVote} id={res._id}>
-                                <input type='submit' value='downvote'/>
+                                <input className='button is-danger' type='submit' value='downvote'/>
                             </form>
                             <p>{res.qid}</p>
                             <form onSubmit={handleResponseDelete} id={res._id}>
                                 <input type='submit' value='Delete Response'/>
-                            </form>
+                            </form> */}
                             </>
                         : ''
                             // <p>{res._id} does not match {res.qid}</p>

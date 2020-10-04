@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
+import './Forms.css';
 
 export default function SignUpForm(props) {
       return (
         <div>
             <h2>Sign Up</h2>
 
-            <form>
+            <form className='myforms'>
                 <div>
                     <label htmlFor='email'>Email</label>
-                    <input type='text' id='email' name='email' onChange={props.handleInput} value={props.email} />
+                    <input class='input is-small' type='email' id='email' name='email' onChange={props.handleInput} value={props.email} />
                 </div>
 
                 <div>
                     <label htmlFor='password'>Password</label>
-                    <input type='text' id='password' name='password' onChange={props.handleInput} value={props.password} />
+                    <input class='input is-small' type='password' id='password' name='password' onChange={props.handleInput} value={props.password} />
                 </div>
 
-                <input type='submit' value='Submit' onClick={props.handleSignUp} />
+                <input class='button is-primary' type='submit' value='Submit' onClick={props.handleSignUp} />
             </form>
         </div>
     );

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Show from '../../src/components/Show.js';
+import '../../src/components/Forms.css';
 
 export default function Questions(props){
     // const { email, password, isLoggedIn } = props.state
@@ -123,15 +124,14 @@ export default function Questions(props){
 
 
     return(
-        <div style={{border: "1px solid gold"}}>
+        <div style={{backgroundColor: 'rgba(21, 90, 133, 0.394)'}}>
             {Object.keys(questionUpdate) < 1 ? 
             <div>
-                <h3>This is the Questions Page</h3>
-                <form onSubmit={handleQuestionSubmit}>
-                    <h3>Post Your Question</h3>
+                <h2 style={{paddingTop: '30px'}}>Submit A Question</h2>
+                <form className='myforms' onSubmit={handleQuestionSubmit}>
                     <label htmlFor="category">Choose a language:</label>
                     <div className='select is-small'>
-                    <select name="category" id="category" onChange={handleQuestionChange}>
+                    <select style={{marginLeft: '10px'}} name="category" id="category" onChange={handleQuestionChange}>
                         <option value="">--Please choose an option--</option>
                         <option value="html">HTML</option>
                         <option value="css">CSS</option>
@@ -142,33 +142,33 @@ export default function Questions(props){
                     </div><br />
                     <p>Current User: {props.state.email}</p>
                     <label htmlFor='topic'>Topic</label>
-                    <input
+                    <input class='input is-small'
                     type='text'
                     id='topic'
                     onChange={handleQuestionChange}
                     value={questionFormInputs.topic}
                     /><br />
                     <label htmlFor='body'>Question</label>
-                    <input
+                    <input class='input is-small'
                     type='text'
                     id='body'
                     onChange={handleQuestionChange}
                     value={questionFormInputs.body}
                     /><br />
-                    <input type='submit' value='Post Question' />
+                    <input style={{marginTop: '10px'}} class='button is-dark' type='submit' value='Post Question' />
                 </form>
 
-                <h3>Filter Results</h3>
-                    <label htmlFor="language">Choose a language:</label>
+                <h2>Filter Results</h2>
+                    <label style={{marginLeft: '20px'}} htmlFor="language">Choose a language:</label>
                     <div className='select is-small'>
-                    <select name="language" id="language" onChange={handleFilterChange}>
-                        <option value="">--Please choose an option--</option>
-                        <option value="html">HTML</option>
-                        <option value="css">CSS</option>
-                        <option value="javascript">Javascript</option>
-                        <option value="ruby">Ruby</option>
-                        <option value="sql">SQL/MQL</option>
-                    </select>
+                        <select style={{marginLeft: '10px'}} name="language" id="language" onChange={handleFilterChange}>
+                            <option value="">--Please choose an option--</option>
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                            <option value="javascript">Javascript</option>
+                            <option value="ruby">Ruby</option>
+                            <option value="sql">SQL/MQL</option>
+                        </select>
                     </div><br />
 
 
@@ -177,24 +177,37 @@ export default function Questions(props){
                     {
                     questions.map(question =>{
                         return(
-                        <div key={question._id} style={{border: "1px solid red"}}>
+                        <div key={question._id}>
                         
                         {
                             question.category === filter.language ?
                             <>
-                            <h5>Category: {question.category}</h5>
-                            <h6>Topic: {question.topic}</h6>
-                            <p>{`${question.userName} asks: ${question.body}`}</p>
-                            <img src={question.userImage} alt='url of user image'/>
-                            <Show q={question}/>
-
-                            <form onSubmit={handleClickUpdateQuestion} id={question._id}>
-                            <input type='submit' value='Update Question'/>
-                            </form>
-
-                            <form onSubmit={handleQuestionDelete} id={question._id}>
-                            <input type='submit' value='Delete Question'/>
-                            </form>
+                            <div style={{boxShadow: '1px 1px 10px 1px rgba(10,10,10,1)', borderRadius: '2px', margin: '10px'}} className='card'>
+                                <div style={{paddingBottom: '0'}} className='card-content'>
+                                    <div className='media'>
+                                        <div className='media-left'>
+                                            <figure className='image is-48x48'>
+                                                <img src={question.userImage} alt='user image'/>
+                                            </figure>
+                                        </div>
+                                        <div className='media-content'>
+                                            <p className='title is-4'>{question.topic}</p>
+                                            <p className='subtitle is-6'>{`${question.userName} asks: ${question.body}`}</p>
+                                            <div className='subtitle is-6'>
+                                                <Show q={question}/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <footer className='card-footer'>
+                                        <form style={{margin: '0', padding: '0'}}className='card-footer-item' onSubmit={handleClickUpdateQuestion} id={question._id}>
+                                            <input className='button is-dark' type='submit' value='Update Question'/>
+                                        </form>
+                                        <form className='card-footer-item' onSubmit={handleQuestionDelete} id={question._id}>
+                                            <input className='button is-dark' type='submit' value='Delete Question'/>
+                                        </form>
+                                    </footer>
+                                </div>
+                            </div>
                             </>
                             : ''
                         }
