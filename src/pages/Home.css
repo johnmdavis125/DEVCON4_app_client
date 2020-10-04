@@ -1,0 +1,28 @@
+.column {
+    background-color: rgba(21, 90, 133, 0.394);
+    color: rgb(12, 56, 106);
+    padding: 40px;
+}
+
+img {
+    border-radius: 3px;
+    box-shadow: 1px 1px 10px 1px rgba(10,10,10,1);
+}
+
+span {
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255, 0.8);
+    margin-top: 10px;
+    margin-bottom: 25px;
+    padding-top: 10px;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+@media (min-width: 1000px) {
+    p {
+        max-width: 800px;
+    }
+}
