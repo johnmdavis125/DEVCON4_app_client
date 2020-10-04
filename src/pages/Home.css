@@ -11,9 +11,10 @@ img {
 
 span {
     font-size: 1.5rem;
-    color: rgb(12, 56, 106);
+    color: rgb(255, 255, 255, 0.8);
     margin-top: 10px;
     margin-bottom: 25px;
+    padding-top: 10px;
 }
 
 h4 {
