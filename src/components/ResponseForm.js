@@ -16,7 +16,7 @@ export default function ResponseForm(props){
 
     const getResponses = async () => {
         try{
-            const response = await fetch('https://cors-anywhere.herokuapp.com/https://devcon-back.herokuapp.com/api/responses'); 
+            const response = await fetch('https://devcon-back.herokuapp.com/api/responses'); 
             const rData = await response.json();
             setResponses(rData)
         }catch(error){
