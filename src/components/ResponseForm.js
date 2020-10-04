@@ -16,7 +16,7 @@ export default function ResponseForm(props){
 
     const getResponses = async () => {
         try{
-            const response = await fetch('https://devcon-back.herokuapp.com/api/responses'); 
+            const response = await fetch('https://cors-anywhere.herokuapp.com/https://devcon-back.herokuapp.com/api/responses'); 
             const rData = await response.json();
             setResponses(rData)
         }catch(error){
@@ -42,7 +42,7 @@ export default function ResponseForm(props){
         event.preventDefault();
         console.log(responseFormInputs);
         try{
-            const response = await axios.post('https://devcon4-back.herokuapp.com/api/responses', responseFormInputs);
+            const response = await axios.post('https://cors-anywhere.herokuapp.com/https://devcon4-back.herokuapp.com/api/responses', responseFormInputs);
             const createdResponse = response.data
             console.log(`this is createdResponse ${createdResponse.body}`);
             await updateResponseFormInputs({
@@ -65,7 +65,7 @@ export default function ResponseForm(props){
             console.log(event);
             try {
             console.log(`look here ${event.target.id}`);
-                await axios.delete(`https://devcon4-back.herokuapp.com/api/responses/${event.target.id}`)
+                await axios.delete(`https://cors-anywhere.herokuapp.com/https://devcon4-back.herokuapp.com/api/responses/${event.target.id}`)
             } catch(error){
                 console.error(error)
             };
@@ -91,10 +91,10 @@ export default function ResponseForm(props){
         event.preventDefault();
         event.persist(); 
         try {
-            const response = await axios.get(`https://devcon4-back.herokuapp.com/api/responses/${event.target.id}`)
+            const response = await axios.get(`https://cors-anywhere.herokuapp.com/https://devcon4-back.herokuapp.com/api/responses/${event.target.id}`)
             const newVote = await response.data.votes + 1
             
-            const resp = await axios.put(`https://devcon4-back.herokuapp.com/api/responses/${event.target.id}`, {votes: newVote});
+            const resp = await axios.put(`https://cors-anywhere.herokuapp.com/https://devcon4-back.herokuapp.com/api/responses/${event.target.id}`, {votes: newVote});
 
         }catch(error){
             console.error(error)
@@ -105,10 +105,10 @@ export default function ResponseForm(props){
         event.preventDefault();
         event.persist(); 
         try {
-            const response = await axios.get(`https://devcon4-back.herokuapp.com/api/responses/${event.target.id}`)
+            const response = await axios.get(`https://cors-anywhere.herokuapp.com/https://devcon4-back.herokuapp.com/api/responses/${event.target.id}`)
             const newVote = await response.data.votes - 1
             
-            const resp = await axios.put(`https://devcon4-back.herokuapp.com/api/responses/${event.target.id}`, {votes: newVote});
+            const resp = await axios.put(`https://cors-anywhere.herokuapp.com/https://devcon4-back.herokuapp.com/api/responses/${event.target.id}`, {votes: newVote});
 
         }catch(error){
             console.error(error)

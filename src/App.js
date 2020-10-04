@@ -60,7 +60,7 @@ export default function App(props){
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://devcon4-back.herokuapp.com/users/signup', {
+      const response = await axios.post('https://cors-anywhere.herokuapp.com/https://devcon4-back.herokuapp.com/users/signup', {
         email: state.email,
         password: state.password,
       });
@@ -91,7 +91,7 @@ export default function App(props){
   const handleLogIn = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://devcon4-back.herokuapp.com/users/login', {
+      const response = await axios.post('https://cors-anywhere.herokuapp.com/https://devcon4-back.herokuapp.com/users/login', {
         email: state.email,
         password: state.password,
       });

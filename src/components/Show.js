@@ -13,7 +13,7 @@ export default function Show(props){
     const openShow = async (event) => {
         event.persist();
         try {
-            const response = await axios.get(`https://devcon4-back.herokuapp.com/api/questions/${_id}`);
+            const response = await axios.get(`https://cors-anywhere.herokuapp.com/https://devcon4-back.herokuapp.com/api/questions/${_id}`);
     
             await setMyShownQuestion({...myShownQuestion, ...response.data});
     
