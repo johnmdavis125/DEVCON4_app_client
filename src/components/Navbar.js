@@ -62,7 +62,7 @@ export default function Navbar(props) {
             <div className='hero-body'>
                 <div className='container'>
                     <h1 className='title'>Welcome to DevCon4</h1>
-                    <h2 className='subtitle'>A Community for Developers...By Developers</h2>
+                    <h2 style={{marginBottom: '0'}} className='subtitle'>For Developers...By Developers</h2>
                 </div>
             </div>
         </section>
