@@ -61,8 +61,8 @@ export default function Navbar(props) {
         <section className='hero is-dark'>
             <div className='hero-body'>
                 <div className='container'>
-                    <h1 className='title'>Welcome to DevCon4</h1>
-                    <h2 style={{marginBottom: '0'}} className='subtitle'>For Developers...By Developers</h2>
+                    <h1 className='title'>DevCon4</h1>
+                    <h2 className='subtitle'>For Developers...By Developers</h2>
                 </div>
             </div>
         </section>
