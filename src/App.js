@@ -60,7 +60,7 @@ export default function App(props){
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://devcon4-front.herokuapp.com/users/signup', {
+      const response = await axios.post('https://devcon4-front.herokuapp.com/signup', {
         email: state.email,
         password: state.password,
       });
@@ -91,7 +91,7 @@ export default function App(props){
   const handleLogIn = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://devcon4-front.herokuapp.com/users/login', {
+      const response = await axios.post('https://devcon4-front.herokuapp.com/login', {
         email: state.email,
         password: state.password,
       });
