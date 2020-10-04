@@ -18,7 +18,7 @@ export default function Questions(props){
     
     const getQuestions = async () => {
         try{
-            const response = await fetch('http://localhost:3001/api/questions'); 
+            const response = await fetch('https://devcon4-front.herokuapp.com/api/questions'); 
             const qData = await response.json();
             setQuestions(qData)
         }catch(error){
@@ -50,7 +50,7 @@ export default function Questions(props){
 
             try{
                 console.log(`look here ${questionFormInputs.userName}, ${questionFormInputs.userImage}`)
-                const response = await axios.post('http://localhost:3001/api/questions', questionFormInputs);
+                const response = await axios.post('https://devcon4-front.herokuapp.com/api/questions', questionFormInputs);
                 const createdQuestion = response.data
                 console.log(`this is createdQuestion ${createdQuestion.body}`);
                 await updateQuestionFormInputs({
@@ -73,7 +73,7 @@ export default function Questions(props){
         console.log(event);
         try {
         console.log(`look here ${event.target.id}`);
-            await axios.delete(`http://localhost:3001/api/questions/${event.target.id}`)
+            await axios.delete(`https://devcon4-front.herokuapp.com/api/questions/${event.target.id}`)
         } catch(error){
             console.error(error)
         };
@@ -83,7 +83,7 @@ export default function Questions(props){
 
     const handleClickUpdateQuestion = async (event) => {
         event.preventDefault();
-        const response = await axios.get(`http://localhost:3001/api/questions/${event.target.id}`);
+        const response = await axios.get(`https://devcon4-front.herokuapp.com/api/questions/${event.target.id}`);
         await setQuestionUpdate({...response.data});
     
         
@@ -99,7 +99,7 @@ export default function Questions(props){
     
     const handleQuestionUpdateSubmit = async (event) => {
         event.preventDefault();
-        const response = await axios.put(`http://localhost:3001/api/questions/${event.target.id}`, {topic: questionUpdate.topic, body: questionUpdate.body});
+        const response = await axios.put(`https://devcon4-front.herokuapp.com/api/questions/${event.target.id}`, {topic: questionUpdate.topic, body: questionUpdate.body});
         await setQuestionUpdate({});
     
     }
