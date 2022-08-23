@@ -1,16 +1,16 @@
-+ Overview
+1. Overview
 
 DEVCON4 is a full-stack MERN web app with secure user authentication via bcrypt. It was designed with the intention of being a stack overflow - style forum site for programming students to post questions, and senior engineers would post answers. This application is still in development.  
 
-+ Project Status: Incomplete, but full CRUD & voting buttons are in place and ready for demo. 
+1. Project Status: Incomplete, but full CRUD & voting buttons are in place and ready for demo. 
 
-+ Background
+1. Background
 
 This project was built during my General Assembly Bootcamp.
 
-+ Design Pattern: MVC
+1. Design Pattern: MVC
 
-+ Technologies Used: 
+1. Technologies Used: 
 
 React.js (w/Hooks)
 
@@ -22,7 +22,7 @@ Node.js
 
 MongoDB Atlas (Cloud)
 
-+ Main Features: 
+1. Main Features: 
 
 Secure user authentication
 
